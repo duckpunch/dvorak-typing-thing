@@ -34,11 +34,18 @@
                 var typed_char = just_typed.charAt(i);
                 if (typed_char == remaining_lesson_content.charAt(0)) {
                     remaining_lesson_content = remaining_lesson_content.substring(1);
+                    var split_index = current_lesson.content.lastIndexOf(remaining_lesson_content);
+                    var first_part = current_lesson.content.substring(0,split_index);
+                    $("#cathy").html("<strong>" + first_part + "</strong>" + remaining_lesson_content);
                 }
                 if (!remaining_lesson_content) {
                     finish_lesson();
                 }
             }
+        });
+        $("#container").css("min-height", $(window).height());
+        $(window).resize(function() {
+            $("#container").css("min-height", $(window).height());
         });
     });
 
@@ -48,7 +55,7 @@
         remaining_lesson_content = current_lesson.content;
         timer.reset();
         $("#cathy").html(current_lesson.content);
-        $("#timothy").val("");
+        $("#timothy").focus().val("");
     }
 
     function finish_lesson() {
@@ -66,12 +73,62 @@
         );
     }
 </script>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+input {
+    padding: 5px;
+    border: 0px;
+    font-size: 14px;
+    background-color: #ffefc3;
+}
+input:focus {
+    outline: none;
+    border: 0px;
+}
+body {
+    min-width: 700px;
+}
+#container {
+    padding-right: 400px;
+    display: box;
+    overflow: hidden;
+}
+#container .column {
+    position: relative;
+    float: left;
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+#typing {
+    width: 100%;
+    background-color: #c0ccab;
+}
+#info {
+    width: 400px;
+    margin-right: -400px;
+    background-color: #4c2b2f;
+}
+#timothy {
+    width: 100%;
+}
+#clock {
+    color: #e8de67;
+}
+</style>
 </head>
 <body>
-<input id="timothy" type-"text" />
-<div id="cathy"></div>
-<div id="clock"></div>
-<div id="lesson-list">
+<div id="container">
+    <div id="typing" class="column">
+        <input id="timothy" type-"text" />
+        <div id="cathy"></div>
+    </div>
+    <div id="info" class="column">
+        <div id="clock">00:00</div>
+        <div id="lesson-list"></div>
+    </div>
 </div>
 <script id="lesson-list-template" type="text/x-jqote-template">
     <button onclick="load_lesson(<%= lessons.indexOf(this) %>)"><%= this.label %> (best: <%= this.best %> wpm)</button><br/>
