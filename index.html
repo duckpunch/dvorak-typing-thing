@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<script src="timer.js"></script>
+<script src="lessons.js"></script>
+<script src="jquery-2.0.0.min.js"></script>
+<script src="jquery.jqote2.min.js"></script>
+<script>
+    var current_lesson = null;
+    var typed_content = "";
+    var remaining_lesson_content = "";
+    var timer = new Timer();
+
+    $(function() {
+        for (var i = 0; i < lessons.length; i++) {
+            lessons[i].best = "0";
+        }
+
+        update_lesson_list();
+        timer.update(function(seconds) {
+            $("#clock").html(seconds);
+        });
+        $("#timothy").keyup(function(event) {
+            if (!remaining_lesson_content) {
+                return;
+            }
+            var $timothy = $(event.currentTarget);
+            var just_typed = $timothy.val().replace(typed_content, "");
+            timer.start();
+            typed_content = $timothy.val();
+
+            for (var i = 0; i < just_typed.length; i++) {
+                var typed_char = just_typed.charAt(i);
+                if (typed_char == remaining_lesson_content.charAt(0)) {
+                    remaining_lesson_content = remaining_lesson_content.substring(1);
+                }
+                if (!remaining_lesson_content) {
+                    finish_lesson();
+                }
+            }
+        });
+    });
+
+    function load_lesson(lesson_index) {
+        current_lesson = lessons[lesson_index];
+        typed_content = "";
+        remaining_lesson_content = current_lesson.content;
+        timer.reset();
+        $("#cathy").html(current_lesson.content);
+        $("#timothy").val("");
+    }
+
+    function finish_lesson() {
+        var time_elapsed = timer.stop();
+        var minutes = time_elapsed/60;
+        var word_count = current_lesson.content.replace(/ /g, "").length/5;
+        var wpm = word_count/minutes;
+        current_lesson.best = wpm;
+        update_lesson_list()
+    }
+
+    function update_lesson_list() {
+        $("#lesson-list").html(
+            $("#lesson-list-template").jqote(lessons)
+        );
+    }
+</script>
+</head>
+<body>
+<input id="timothy" type-"text" />
+<div id="cathy"></div>
+<div id="clock"></div>
+<div id="lesson-list">
+</div>
+<script id="lesson-list-template" type="text/x-jqote-template">
+    <button onclick="load_lesson(<%= lessons.indexOf(this) %>)"><%= this.label %> (best: <%= this.best %> wpm)</button><br/>
+</script>
+</body>
+</html>
