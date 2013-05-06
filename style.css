@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+input {
+    padding: 5px;
+    border: 0px;
+    font-size: 14px;
+    background-color: #dbdbdb;
+}
+input:focus {
+    outline: none;
+    border: 0px;
+}
+body {
+    min-width: 700px;
+}
+#container {
+    padding-right: 480px;
+    display: box;
+    overflow: hidden;
+}
+#container .column {
+    position: relative;
+    float: left;
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+#typing {
+    width: 100%;
+    background-color: #b89a7b;
+}
+#info {
+    width: 480px;
+    margin-right: -480px;
+    background-color: #9bbaac;
+}
+#timothy {
+    width: 100%;
+}
+#cathy {
+    padding: 10px;
+}
+#current-wpm, #word-count, #clock {
+    display: inline-block;
+    font-size: 20pt;
+    color: #f2d649;
+    width: 35%;
+    margin-left: 10px;
+}
+#clock {
+    width: 20%;
+}
+#error {
+    height: 30px;
+    padding: 3px;
+}
+#error-box {
+    padding: 3px;
+    border: 1px solid #d95d50;
+    color: #d95d50;
+    background-color: #ffaaaa;
+    width: 300px;
+    display: none;
+    margin: 0 auto;
+    text-align: center;
+}
+#kb-nav-container {
+    list-style: none;
+    text-align: center;
+    margin-bottom: 10px;
+}
+#kb-nav-container li {
+    display: inline-block;
+    width: 22%;
+    text-align: center;
+    background-color: #b8987b;
+    padding: 0 5px 3px 3px;
+    box-shadow: 0px 1px 1px 0px #333;
+    color: #ccc;
+}
+.kb-nav {
+    display: inline-block;
+    width: 100%;
+    border: 1px dashed #f2d649;
+    border-top: 0px;
+    padding-top: 3px;
+    cursor: pointer;
+}
+.selected, .kb-nav:hover {
+    color: #fff;
+    font-weight: bold;
+}
+#keyboard {
+    text-align: center;
+    margin-bottom: 10px;
+}
+#keyboard img {
+    display: inline-block;
+}
+#lesson-list {
+    list-style: none;
+    border-bottom: 1px dashed #f2d649;
+    color: #ccc;
+}
+#lesson-list li {
+    cursor: pointer;
+    background-color: #7b9a8c;
+    border-top: 1px dashed #f2d649;
+    padding: 5px;
+}
+.selected-lesson, #lesson-list li:hover {
+    color: #f2d649;
+}
+.completed {
+    color: #f2d649;
+}
