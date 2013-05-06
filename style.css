@@ -116,3 +116,14 @@ body {
 .completed {
     color: #f2d649;
 }
+#credit {
+    margin-top: 20px;
+    color: #5b7a6c;
+}
+#credit a {
+    text-decoration: none;
+    color: #f2d649;
+}
+#credit a:hover {
+    text-decoration: underline;
+}
